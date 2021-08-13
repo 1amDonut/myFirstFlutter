@@ -30,6 +30,17 @@ class TodoFormWidget extends StatelessWidget{
  );
 
  Widget buildTitle() => TextFormField(
+   maxLines: 1,
+   initialValue: title,
+   onChanged: onChangedTitle,
+   validator: ( title){
+     if (title!.isEmpty) {
+        return '請勿輸入空值';
+     }else{
+       return null;
+     }
+
+   },
    decoration: InputDecoration(
      border: UnderlineInputBorder(),
      labelText: '標題',
