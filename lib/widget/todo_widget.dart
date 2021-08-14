@@ -2,6 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_app/model/todo.dart';
 import 'package:flutter_slidable/flutter_slidable.dart';
+import 'package:flutter_app/page/edit_todo_page.dart';
 
 class TodoWidget extends StatelessWidget {
   final Todo todo;
@@ -20,7 +21,7 @@ class TodoWidget extends StatelessWidget {
       actions: [
         IconSlideAction(
           color:Colors.orange,
-          onTap: () {},
+          onTap: () => editTodo(context, todo),
           caption: '編輯',
           icon: Icons.edit,
         )
@@ -64,5 +65,11 @@ class TodoWidget extends StatelessWidget {
         )
       ],
     )
+  );
+
+  void editTodo(BuildContext context, Todo todo) => Navigator.of(context).push(
+
+    MaterialPageRoute(builder: (context) => EditTodoPage(todo: todo),
+    ),
   );
 }

@@ -22,5 +22,12 @@ class TodosProvider extends ChangeNotifier{
 
     notifyListeners();
   }
+
+  void updateTodo(Todo todo, String title, String description){
+    todo.title = title;
+    todo.description = description;
+
+    notifyListeners();
+  }
 }
 
