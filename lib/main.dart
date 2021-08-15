@@ -1,10 +1,17 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_app/api/firebase_api.dart';
+import 'package:flutter_app/model/todo.dart';
 import 'package:flutter_app/provider/todos.dart';
 import 'package:flutter_app/widget/todo_list_widget.dart';
 import 'package:provider/provider.dart';
 import 'widget/add_todo_dialog_widget.dart';
+import 'package:firebase_core/firebase_core.dart';
 
-void main() {
+Future main() async{
+  WidgetsFlutterBinding.ensureInitialized();
+  await Firebase.initializeApp();
+
   runApp(const MyApp());
 }
 
@@ -83,7 +90,22 @@ class _MyHomePageState extends State<MyHomePage> {
         // the App.build method, and use it to set our appbar title.
         title: Text(widget.title),
       ),
-      body:TodoListWidget(),
+      body:
+      StreamBuilder<List<Todo>>(
+          stream: FirebaseApi.getEntries(),
+          builder: (context, snapshot){
+            if (snapshot.hasError) {
+            return buildText('Something Went Wrong Try later');
+            } else {
+              final todos = snapshot.data;
+              final provider = Provider.of<TodosProvider>(context);
+
+              provider.setTodos(todos!);
+
+              return TodoListWidget();
+            }
+          },
+      ),
       // body: Center(
       //   // Center is a layout widget. It takes a single child and positions it
       //   // in the middle of the parent.
@@ -122,3 +144,10 @@ class _MyHomePageState extends State<MyHomePage> {
     );
   }
 }
+
+  Widget buildText(String text) => Center(
+    child: Text(
+      text,
+      style: TextStyle(fontSize: 24, color: Colors.white),
+    ),
+  );

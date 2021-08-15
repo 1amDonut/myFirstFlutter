@@ -1,27 +1,14 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_app/api/firebase_api.dart';
 import 'package:flutter_app/model/todo.dart';
 
 class TodosProvider extends ChangeNotifier{
-  List<Todo> _todos = [
-    Todo(
-      id: '1',
-      createdTime: DateTime.now(),
-      title: 'this is a message',
-    ),
-    Todo(
-      id: '2',
-      createdTime: DateTime.now(),
-      title: 'this is a message',
-    ),
-  ];
+  List<Todo> _todos = [];
 
   List<Todo> get todos => _todos.where((todo) => todo.isDone == false).toList();
 
-  void addTodo(Todo todo){
-    _todos.add(todo);
+  void addTodo(Todo todo) => FirebaseApi.createTodo(todo);
 
-    notifyListeners();
-  }
   void removeTodo(Todo todo){
       _todos.remove(todo);
 
@@ -34,5 +21,12 @@ class TodosProvider extends ChangeNotifier{
 
     notifyListeners();
   }
+
+  void setTodos(List<Todo> todos) =>
+      WidgetsBinding.instance!.addPostFrameCallback((_) {
+        _todos = todos;
+        notifyListeners();
+      });
+
 }
 
