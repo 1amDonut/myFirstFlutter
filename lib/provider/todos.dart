@@ -12,14 +12,16 @@ class TodosProvider extends ChangeNotifier{
   void removeTodo(Todo todo){
       _todos.remove(todo);
 
-      notifyListeners();
+      FirebaseApi.Delete(todo);
+      // notifyListeners();
   }
 
   void updateTodo(Todo todo, String title, String description){
     todo.title = title;
     todo.description = description;
 
-    notifyListeners();
+    FirebaseApi.updateTodo(todo);
+    // notifyListeners();
   }
 
   void setTodos(List<Todo> todos) =>

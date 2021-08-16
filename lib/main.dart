@@ -39,7 +39,7 @@ class MyApp extends StatelessWidget {
             scaffoldBackgroundColor: Color(0xFFf6f5ee),
             primarySwatch: Colors.blue,
         ),
-        home:  const MyHomePage(title: 'Flutter Demo Home Page'),
+        home:  const MyHomePage(title: 'My First Flutter Demo'),
       ),
   );
 }
