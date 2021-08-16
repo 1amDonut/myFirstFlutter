@@ -17,11 +17,11 @@ samples, guidance on mobile development, and a full API reference.
 
 # Demo
 
-## add task
+add task
 ![image](https://github.com/1amDonut/myFirstFlutter/blob/master/demo-add-gif.gif)
 
-## update
-![image](https://github.com/1amDonut/myFirstFlutter/blob/master/demo-modify-gif.gif)
+update
+![image](https://github.com/1amDonut/myFirstFlutter/blob/master/demo.modify-gif.gif)
 
-## delete
+delete
 ![image](https://github.com/1amDonut/myFirstFlutter/blob/master/demo-delete-gif.gif)
